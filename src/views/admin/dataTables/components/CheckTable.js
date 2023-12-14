@@ -5,6 +5,8 @@ import {
   Tbody,
   Td,
   Text,
+  Input,
+  Switch,
   Th,
   Thead,
   Tr,
@@ -61,7 +63,7 @@ export default function CheckTable(props) {
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'>
-          Check Table
+          cost-analysis
         </Text>
         <Menu />
       </Flex>
@@ -94,20 +96,20 @@ export default function CheckTable(props) {
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
                   let data = "";
-                  if (cell.column.Header === "NAME") {
+                  if (cell.column.Header === "COLUMN NAME") {
                     data = (
                       <Flex align='center'>
-                        <Checkbox
+                        {/* <Checkbox
                           defaultChecked={cell.value[1]}
                           colorScheme='brandScheme'
                           me='10px'
-                        />
+                        /> */}
                         <Text color={textColor} fontSize='sm' fontWeight='700'>
                           {cell.value[0]}
                         </Text>
                       </Flex>
                     );
-                  } else if (cell.column.Header === "PROGRESS") {
+                  } else if (cell.column.Header === "DATA TYPE") {
                     data = (
                       <Flex align='center'>
                         <Text
@@ -119,17 +121,17 @@ export default function CheckTable(props) {
                         </Text>
                       </Flex>
                     );
-                  } else if (cell.column.Header === "QUANTITY") {
+                  } else if (cell.column.Header === "DESCRIPTION") {
                     data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
+                      <Input placeholder="Description" color={textColor} fontSize='sm' fontWeight='700' borderRadius='16px'/>
                     );
-                  } else if (cell.column.Header === "DATE") {
+                  } else if (cell.column.Header === "IS SENSITIVE") {
                     data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
+                      // <FormControl display="flex" alignItems="center">
+                      //   <FormLabel htmlFor="email-alerts" mb="0">
+                      //   </FormLabel>
+                        <Switch id="is-sensitive" colorScheme="brand" />
+                      // </FormControl>
                     );
                   }
                   return (

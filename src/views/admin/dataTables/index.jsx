@@ -22,23 +22,113 @@
 
 // Chakra imports
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import DevelopmentTable from "views/admin/dataTables/components/DevelopmentTable";
 import CheckTable from "views/admin/dataTables/components/CheckTable";
-import ColumnsTable from "views/admin/dataTables/components/ColumnsTable";
-import ComplexTable from "views/admin/dataTables/components/ComplexTable";
-import {
-  columnsDataDevelopment,
-  columnsDataCheck,
-  columnsDataColumns,
-  columnsDataComplex,
-} from "views/admin/dataTables/variables/columnsData";
-import tableDataDevelopment from "views/admin/dataTables/variables/tableDataDevelopment.json";
-import tableDataCheck from "views/admin/dataTables/variables/tableDataCheck.json";
-import tableDataColumns from "views/admin/dataTables/variables/tableDataColumns.json";
-import tableDataComplex from "views/admin/dataTables/variables/tableDataComplex.json";
+
 import React from "react";
 
 export default function Settings() {
+
+  const tableDataCheck = [
+    {
+      "name":["Marketplace",false],
+      "quantity": 2458, 
+      "date": "12.Jan.2021",
+      "progress": 75.5  
+    },
+    {
+      "name":["Venus DB PRO",true],
+      "quantity": 1485, 
+      "date": "21.Feb.2021",
+      "progress": 35.4  
+    },
+    {
+      "name":["Venus DS",true],
+      "quantity": 1024, 
+      "date": "13.Mar.2021",
+      "progress": 25  
+    },
+    {
+      "name":["Venus 3D Asset",true],
+      "quantity": 858, 
+      "date": "24.Jan.2021",
+      "progress": 100  
+    },
+    {
+      "name":["Marketplace",false],
+      "quantity": 258, 
+      "date": "Oct 24, 2022",
+      "progress": 75.5  
+    },
+    {
+      "name":["Marketplace",false],
+      "quantity": 258, 
+      "date": "Oct 24, 2022",
+      "progress": 75.5  
+    },
+    {
+      "name":["Marketplace",false],
+      "quantity": 258, 
+      "date": "12.Jan.2021",
+      "progress": 75.5  
+    },
+    {
+      "name":["Venus DB PRO",false],
+      "quantity": 858, 
+      "date": "21.Feb.2021",
+      "progress": 35.4  
+    },
+    {
+      "name":["Venus DS",false],
+      "quantity": 1024, 
+      "date": "13.Mar.2021",
+      "progress": 25  
+    },
+    {
+      "name":["Venus 3D Asset",false],
+      "quantity": 258, 
+      "date": "24.Jan.2021",
+      "progress": 100  
+    },
+    {
+      "name":["Marketplace",false],
+      "quantity": 1024, 
+      "date": "Oct 24, 2022",
+      "progress": 75.5  
+    },
+    {
+      "name":["Marketplace",false],
+      "quantity": 258, 
+      "date": "Oct 24, 2022",
+      "progress": 75.5  
+    },
+    {
+      "name":["Marketplace",false],
+      "quantity": 258, 
+      "date": "Oct 24, 2022",
+      "progress": 75.5  
+    }
+  ]
+  
+  const columnsDataCheck = [
+    {
+      Header: "COLUMN NAME",
+      accessor: "name",
+    },
+    {
+      Header: "DATA TYPE",
+      accessor: "progress",
+    },
+    {
+      Header: "DESCRIPTION",
+      accessor: "quantity",
+    },
+    {
+      Header: "IS SENSITIVE",
+      accessor: "date",
+    },
+  ];
+
+
   // Chakra Color Mode
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
@@ -46,19 +136,19 @@ export default function Settings() {
         mb='20px'
         columns={{ sm: 1, md: 2 }}
         spacing={{ base: "20px", xl: "20px" }}>
-        <DevelopmentTable
+        {/* <DevelopmentTable
           columnsData={columnsDataDevelopment}
           tableData={tableDataDevelopment}
-        />
+        /> */}
         <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
-        <ColumnsTable
+        {/* <ColumnsTable
           columnsData={columnsDataColumns}
           tableData={tableDataColumns}
         />
         <ComplexTable
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
-        />
+        /> */}
       </SimpleGrid>
     </Box>
   );

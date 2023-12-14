@@ -122,6 +122,8 @@ export default function Dashboard(props) {
 						transitionDuration='.2s, .2s, .35s'
 						transitionProperty='top, bottom, width'
 						transitionTimingFunction='linear, linear, ease'>
+						
+						
 						<Portal>
 							<Box>
 								<Navbar

@@ -39,7 +39,7 @@ export default function Settings() {
 
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isError, setIsError] = useState(null);
   const [data, setData] = useState(null);
   const [showTable, setShowTable] = useState(false);
   const [isClearable, setIsClearable] = useState(true);
@@ -90,7 +90,7 @@ export default function Settings() {
     if (selectedOption === null){
       return;
     }
-
+    setIsError(false)
     const url = `https://dremiofunc.azurewebsites.net/api/ShowDatasetDesc?code=Ln4D4Fh4HAFzg7-mtPa-LhL8UnXAoMWDQGxTyDb2cpi1AzFuqeGTtQ==&name=${selectedOption.value}`
     fetch(url)
       .then((res) => {
@@ -109,65 +109,52 @@ export default function Settings() {
       });
   };
 
-  function validateName(value) {
-    let error
-    if (!value) {
-      error = "Name is required"
-    } else if (value.toLowerCase() !== "naruto") {
-      error = "Jeez! You're not a fan 😱"
-    }
-    return error
-  }
+  const customStyles = {
+    singleValue: (provided, state) => ({
+      ...provided,
+      // These properties allow the text to wrap within the control
+      whiteSpace: 'normal',
+      wordWrap: 'break-word',
+      // You may need to adjust the line height to ensure the wrapped lines are spaced appropriately
+      lineHeight: 'normal',
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      // These properties allow the text to wrap within the options
+      whiteSpace: 'normal',
+      wordWrap: 'break-word',
+      // You may need to adjust the line height to ensure the wrapped lines are spaced appropriately
+      lineHeight: 'normal',
+    }),
+    // You might also need to adjust the control height to accommodate wrapped text
+    control: (provided) => ({
+      ...provided,
+      // If you have a specific height you want to set, you can set it here
+      minHeight: '50px',
+    }),
+    // Adjusting the value container might also be necessary
+    valueContainer: (provided) => ({
+      ...provided,
+      overflow: 'hidden', // Prevents text overflow
+      whiteSpace: 'normal', // Allows text to wrap
+      display: 'flex',
+      flexWrap: 'wrap', // Allows child elements to wrap within the container
+    }),
+    // Other styles...
+  };
+
 
   // Chakra Color Mode
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-
-{/* <Formik
-      initialValues={{ name: "Sasuke" }}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          actions.setSubmitting(false)
-        }, 1000)
-      }}
-    >
-      {(props) => (
-        <Form>
-          <Field name="name" validate={validateName}>
-            {({ field, form }) => (
-              <FormControl isInvalid={form.errors.name && form.touched.name}>
-                <FormLabel htmlFor="name">First name</FormLabel>
-                <Input
-                  {...field}
-                  id="name"
-                  placeholder="name"
-                  borderRadius="16px"
-                />
-                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-          <Button
-            mt={4}
-            colorScheme="brand"
-            isLoading={props.isSubmitting}
-            type="submit"
-          >
-            Submit
-          </Button>
-        </Form>
-      )}
-    </Formik> */}
-
       <Grid
         mb='20px'
         templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(2, 1fr)"
+        templateColumns="repeat(4fr 6fr)"
         gap={{ sm: 1, md: 4 }}
       // spacing={{ base: "20px", xl: "20px" }}
       >
-        <GridItem colSpan={1}>
+        <GridItem width="300px" colSpan={1}>
           {isLoading && ( <Progress size="md" isIndeterminate />)}
           {!isLoading && data && (
             <Select
@@ -182,12 +169,13 @@ export default function Settings() {
               isSearchable={isSearchable}
               name="color"
               options={data.map(item => ({ value: item, label: item }))}
+              styles={customStyles}
             />
           )}
         </GridItem>
           {showTable && 
-            (<GridItem rowSpan={2}>
-              <CheckTable columnsData={columnsDataCheck} tableData={tableData} titleData={titleData}/>
+            (<GridItem colStart={2} rowSpan={2}>
+              <CheckTable columnsData={columnsDataCheck} tableData={tableData} titleData={titleData} isError={isError} setIsError={setIsError} />
             </GridItem>
             )
           }

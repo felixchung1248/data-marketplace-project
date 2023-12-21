@@ -16,7 +16,7 @@ import {
   , FormErrorMessage
   , Button
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {
   useGlobalFilter,
@@ -29,8 +29,9 @@ import {
 import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
 export default function CheckTable(props) {
-  const { columnsData, tableData, titleData } = props;
+  const { columnsData, tableData, titleData, isError, setIsError } = props;
   const tableDataFields = tableData.fields;
+  // const [ isError, setIsError ] = useState(false)
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableDataFields, [tableDataFields]);
@@ -56,7 +57,15 @@ export default function CheckTable(props) {
   initialState.pageSize = 11;
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
+  const errorColor = useColorModeValue("red.600", "orange.100");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+
+  function validateDescription(value) {
+    if (!value) {
+      setIsError(true)
+    } 
+  }
+
   return (
     <Formik
       initialValues={data.reduce((values, row, index) => ({
@@ -65,6 +74,8 @@ export default function CheckTable(props) {
         , [`isSensitive_${index}`]: false
       }), {})
       }
+      validateOnBlur={false}
+      validateOnChange={false}
       onSubmit={(values, actions) => {
         setTimeout(() => {
           // alert(JSON.stringify(values, null, 2))
@@ -72,17 +83,17 @@ export default function CheckTable(props) {
             const descriptionValueKey = `description_${index}`;
             const isSensitiveValueKey = `isSensitive_${index}`;
             let description = values[descriptionValueKey];
-            let isSensitive = values[isSensitiveValueKey];
+            let is_sensitive = values[isSensitiveValueKey] ? 1 : 0;
 
             return {
               ...field,
               description,
-              isSensitive
+              is_sensitive
             };
           });
           const tempResult = transformedValues.map(item => ({
             ...item, // Spread the rest of the properties
-            datatype: item.type.name, // Add new datatype property
+            data_type: item.type.name, // Add new datatype property
             type: undefined // Set type as undefined to remove it from the object
           })).map(item => {
             const { type, ...rest } = item; // Destructure to exclude the type property
@@ -111,6 +122,18 @@ export default function CheckTable(props) {
             w='100%'
             px='0px'
             overflowX={{ sm: "scroll", lg: "hidden" }}>
+            {isError && (
+              <Flex px='25px' justify='space-between' mb='20px' align='center'>
+              <Text
+                color={errorColor}
+                fontSize='15px'
+                fontWeight='700'
+                lineHeight='100%'>
+                Error: Description cannot be empty
+              </Text>
+              {/* <Menu /> */}
+              </Flex>
+            )}
             <Flex px='25px' justify='space-between' mb='20px' align='center'>
               <Text
                 color={textColor}
@@ -121,7 +144,6 @@ export default function CheckTable(props) {
               </Text>
               {/* <Menu /> */}
             </Flex>
-
             <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
               <Thead>
                 {headerGroups.map((headerGroup, index) => (
@@ -179,7 +201,7 @@ export default function CheckTable(props) {
                         } else if (cell.column.Header === "DESCRIPTION") {
                           const fieldName = `description_${rowIndex}`;
                           data = (
-                            <Field name={fieldName}>
+                            <Field name={fieldName} validate={validateDescription}>
                               {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.name && form.touched.name}>
                                   {/* <FormLabel htmlFor="name">First name</FormLabel> */}
@@ -192,7 +214,7 @@ export default function CheckTable(props) {
                                     fontWeight='700'
                                     borderRadius='16px'
                                   />
-                                  <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                                  <FormErrorMessage>{form.errors[field.name]}</FormErrorMessage>
                                 </FormControl>
                               )}
                             </Field>

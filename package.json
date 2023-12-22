@@ -38,6 +38,11 @@
     "web-vitals": "^1.1.2",
     "formik": "^2.2.9"
   },
+  "overrides": {
+    "react-lorem-component": {
+      "react": "17.0.2"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

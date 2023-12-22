@@ -23,10 +23,18 @@
 // Chakra imports
 import { 
   Box
-  , SimpleGrid
   , Grid
   , GridItem
   , Progress
+  ,Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure
+  ,Button
 } from "@chakra-ui/react";
 
 import CheckTable from "views/admin/dataTables/components/CheckTable";
@@ -39,7 +47,7 @@ export default function Settings() {
 
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(null);
+  const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   const [showTable, setShowTable] = useState(false);
   const [isClearable, setIsClearable] = useState(true);
@@ -47,6 +55,7 @@ export default function Settings() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
   const [titleData, setTitleData] = useState(false);
+  const [ isOpen, setIsOpen ] = useState(false);
 
   useEffect(() => {
     fetch('https://dremiofunc.azurewebsites.net/api/ListAllDatasets?code=BjojRSGOwGo7-g66PBI1O0iQkvTqHqADqRNRq3XF_aLbAzFuZvxgrA==')
@@ -90,7 +99,7 @@ export default function Settings() {
     if (selectedOption === null){
       return;
     }
-    setIsError(false)
+    setError(null)
     const url = `https://dremiofunc.azurewebsites.net/api/ShowDatasetDesc?code=Ln4D4Fh4HAFzg7-mtPa-LhL8UnXAoMWDQGxTyDb2cpi1AzFuqeGTtQ==&name=${selectedOption.value}`
     fetch(url)
       .then((res) => {
@@ -143,10 +152,27 @@ export default function Settings() {
     // Other styles...
   };
 
+  const onClose = () => setIsOpen(false);
+
 
   // Chakra Color Mode
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader></ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            Request has been submitted successfully
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="brand" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Grid
         mb='20px'
         templateRows="repeat(2, 1fr)"
@@ -154,7 +180,7 @@ export default function Settings() {
         gap={{ sm: 1, md: 4 }}
       // spacing={{ base: "20px", xl: "20px" }}
       >
-        <GridItem width="300px" colSpan={1}>
+        <GridItem width="350px" colSpan={1}>
           {isLoading && ( <Progress size="md" isIndeterminate />)}
           {!isLoading && data && (
             <Select
@@ -175,7 +201,15 @@ export default function Settings() {
         </GridItem>
           {showTable && 
             (<GridItem colStart={2} rowSpan={2}>
-              <CheckTable columnsData={columnsDataCheck} tableData={tableData} titleData={titleData} isError={isError} setIsError={setIsError} />
+              <CheckTable 
+                columnsData={columnsDataCheck} 
+                tableData={tableData} 
+                titleData={titleData} 
+                error={error} 
+                setError={setError} 
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+              />
             </GridItem>
             )
           }

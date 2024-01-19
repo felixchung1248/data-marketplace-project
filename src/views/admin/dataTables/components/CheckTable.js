@@ -109,7 +109,6 @@ export default function CheckTable(props) {
               item => ({
                 ...item
                 , dataset_path: titleData
-                , status: "Pending"
                 , create_datetime: new Date().toISOString()
                 , create_user: "frontend"
                 , last_modified_datetime: new Date().toISOString()
@@ -117,8 +116,10 @@ export default function CheckTable(props) {
               })
             );
             // console.log(JSON.stringify(finalResult, null, 2))
-
-            const url = "https://datamgmtfunc.azurewebsites.net/api/InsertDraftDataCatalog?code=XI2Twcl5WwFXPPKa2ByeyNT8zTgUGgZtshlWjpZO8WAVAzFuLXg86A=="
+            const body = JSON.stringify(finalResult)
+            console.log(body)
+            const url = "http://datamgmtdemo01.eastasia.cloudapp.azure.com/request-dataset-deploy"
+            // const url = "http://localhost:5001/request-dataset-deploy"
 
             fetch(url, {
               method: 'POST', // Specify the method

@@ -57,8 +57,10 @@ export default function Settings() {
   const [titleData, setTitleData] = useState(false);
   const [ isOpen, setIsOpen ] = useState(false);
 
+  const apiUrl = "http://datamgmtdemo01.eastasia.cloudapp.azure.com/listalldatasets";
+  console.log(`ListALLDatasets URL: ${apiUrl}`)
   useEffect(() => {
-    fetch('https://dremiofunc.azurewebsites.net/api/ListAllDatasets?code=BjojRSGOwGo7-g66PBI1O0iQkvTqHqADqRNRq3XF_aLbAzFuZvxgrA==')
+    fetch(apiUrl)
       .then((res) => {
         if (!res.ok) {
           throw new Error('Network response was not ok');
@@ -100,7 +102,7 @@ export default function Settings() {
       return;
     }
     setError(null)
-    const url = `https://dremiofunc.azurewebsites.net/api/ShowDatasetDesc?code=Ln4D4Fh4HAFzg7-mtPa-LhL8UnXAoMWDQGxTyDb2cpi1AzFuqeGTtQ==&name=${selectedOption.value}`
+    const url = `http://datamgmtdemo01.eastasia.cloudapp.azure.com/showdatasetdesc?name=${selectedOption.value}`
     fetch(url)
       .then((res) => {
         if (!res.ok) {

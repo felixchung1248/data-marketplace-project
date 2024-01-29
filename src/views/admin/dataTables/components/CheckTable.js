@@ -54,7 +54,7 @@ export default function CheckTable(props) {
     prepareRow,
     initialState,
   } = tableInstance;
-  initialState.pageSize = 11;
+  initialState.pageSize = 9999;
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const errorColor = useColorModeValue("red.600", "orange.100");

@@ -16,6 +16,7 @@ import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
 import RTL from "views/admin/rtl";
+import GenAi from "views/admin/genAi";
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
@@ -45,7 +46,7 @@ const routes = [
   {
     name: "Gen AI chatroom",
     layout: "/admin",
-    path: "/nft-marketplace",
+    path: "/genai",
     icon: (
       <Icon
         as={MdCall}
@@ -54,7 +55,7 @@ const routes = [
         color='inherit'
       />
     ),
-    component: NFTMarketplace,
+    component: GenAi,
     secondary: true,
   },
   {

@@ -70,7 +70,7 @@ export default function Marketplace() {
         <Flex
           flexDirection='column'
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
-          <Banner />
+          {/* <Banner /> */}
           <Flex direction='column'>
             <Flex
               mt='45px'
@@ -79,14 +79,14 @@ export default function Marketplace() {
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}>
               <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
-                Trending NFTs
+                Coming soon
               </Text>
               <Flex
                 align='center'
                 me='20px'
                 ms={{ base: "24px", md: "0px" }}
                 mt={{ base: "20px", md: "0px" }}>
-                <Link
+                {/* <Link
                   color={textColorBrand}
                   fontWeight='500'
                   me={{ base: "34px", md: "44px" }}
@@ -109,11 +109,11 @@ export default function Marketplace() {
                 </Link>
                 <Link color={textColorBrand} fontWeight='500' to='#sports'>
                   Sports
-                </Link>
+                </Link> */}
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
-              <NFT
+              {/* <NFT
                 name='Abstract Colors'
                 author='By Esthera Jackson'
                 bidders={[
@@ -163,9 +163,9 @@ export default function Marketplace() {
                 image={Nft3}
                 currentbid='0.91 ETH'
                 download='#'
-              />
+              /> */}
             </SimpleGrid>
-            <Text
+            {/* <Text
               mt='45px'
               mb='36px'
               color={textColor}
@@ -173,12 +173,12 @@ export default function Marketplace() {
               ms='24px'
               fontWeight='700'>
               Recently Added
-            </Text>
+            </Text> */}
             <SimpleGrid
               columns={{ base: 1, md: 3 }}
               gap='20px'
               mb={{ base: "20px", xl: "0px" }}>
-              <NFT
+              {/* <NFT
                 name='Swipe Circles'
                 author='By Peter Will'
                 bidders={[
@@ -228,20 +228,20 @@ export default function Marketplace() {
                 image={Nft6}
                 currentbid='0.91 ETH'
                 download='#'
-              />
+              /> */}
             </SimpleGrid>
           </Flex>
         </Flex>
         <Flex
           flexDirection='column'
           gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}>
-          <Card px='0px' mb='20px'>
+          {/* <Card px='0px' mb='20px'>
             <TableTopCreators
               tableData={tableDataTopCreators}
               columnsData={tableColumnsTopCreators}
             />
-          </Card>
-          <Card p='0px'>
+          </Card> */}
+          {/* <Card p='0px'>
             <Flex
               align={{ sm: "flex-start", lg: "center" }}
               justify='space-between'
@@ -296,7 +296,7 @@ export default function Marketplace() {
               image={Nft6}
               price='0.91 ETH'
             />
-          </Card>
+          </Card> */}
         </Flex>
       </Grid>
       {/* Delete Product */}

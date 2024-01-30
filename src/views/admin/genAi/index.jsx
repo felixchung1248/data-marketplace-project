@@ -51,7 +51,7 @@ export default function Settings() {
 
   // Chakra Color Mode
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+    <Box>
       <Chat />
     </Box>
   );

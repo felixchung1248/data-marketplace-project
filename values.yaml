@@ -12,4 +12,4 @@ service:
   nodePort: 30030
   
 jenkins:
-    workingDir: /var/lib/jenkins/workspace/CD/generic-app-deploy/data-marketplace-project/project    ## Assume using Jenkins
+    workingDir: /var/lib/jenkins/workspace/CD/generic-app-deploy/chart/project    ## Assume using Jenkins

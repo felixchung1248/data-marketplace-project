@@ -21,10 +21,10 @@ spec:
                   cp -R /source/* /mnt/
                   npm install --force
           volumeMounts:
-          - name: react-app-pvc
-          mountPath: /mnt
-          - name: app-source
-          mountPath: /source
+            - name: react-app-pvc
+              mountPath: /mnt
+            - name: app-source
+              mountPath: /source
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

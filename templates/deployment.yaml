@@ -14,17 +14,17 @@ spec:
     spec:
       initContainers:
         - name: copy-codes
-            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-            command: ["/bin/sh", "-c"]
-            args:  
-                - |
-                    cp -R /source/* /mnt/
-                    npm install --force
-            volumeMounts:
-            - name: react-app-pvc
-              mountPath: /mnt
-            - name: app-source
-              mountPath: /source
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command: ["/bin/sh", "-c"]
+          args:  
+              - |
+                  cp -R /source/* /mnt/
+                  npm install --force
+          volumeMounts:
+          - name: react-app-pvc
+          mountPath: /mnt
+          - name: app-source
+          mountPath: /source
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

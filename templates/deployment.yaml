@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "data-mgmt-web.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "data-mgmt-web.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "data-mgmt-web.name" . }}
+    spec:
+      initContainers:
+        - name: copy-codes
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            command: ["/bin/sh", "-c"]
+            args:  
+                - |
+                    cp -R /source/* /mnt/
+                    npm install --force
+            volumeMounts:
+            - name: react-app-pvc
+              mountPath: /mnt
+            - name: app-source
+              mountPath: /source
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: react-app-pvc
+              mountPath: /mnt
+          command: ["npm", "start"]
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          workingDir: /mnt
+      volumes:
+        - name: app-source
+          hostPath:
+            path: {{ .Values.jenkins.workingDir }}
+        - name: react-app-pvc
+          persistentVolumeClaim:
+            claimName: react-app-pvc

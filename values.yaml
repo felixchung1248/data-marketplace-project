@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: dataopennesscommunity/demo-golden
+  pullPolicy: Always
+  tag: "latest"
+
+service:
+  type: NodePort
+  port: 3000
+  targetPort: 3000
+  nodePort: 30030
+  
+jenkins:
+    workingDir: /var/lib/jenkins/workspace/CD/generic-app-deploy/data-marketplace-project/project    ## Assume using Jenkins

@@ -135,42 +135,42 @@ export default function Marketplace() {
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
-              { 'Abstract Colors'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
+              { ('Abstract Colors'.toLowerCase().includes(searchString.toLowerCase()) || ('Esthera Jackson'.toLowerCase().includes(searchString.toLowerCase()))) && <DatasetCard
                 name='Abstract Colors'
                 author='By Esthera Jackson'
                 image={Nft1}
                 rating={3}
                 download='#'
               />}
-              { 'ETH AI Brain'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
+              { ('ETH AI Brain'.toLowerCase().includes(searchString.toLowerCase()) || ('Nick Wilson'.toLowerCase().includes(searchString.toLowerCase()))) && <DatasetCard
                 name='ETH AI Brain'
                 author='By Nick Wilson'
                 image={Nft2}
                 rating={1}
                 download='#'
               />}
-              { 'Mesh Gradients'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
-                name='Mesh Gradients '
+              { ('Mesh Gradients'.toLowerCase().includes(searchString.toLowerCase()) || ('Will Smith'.toLowerCase().includes(searchString.toLowerCase()))) && <DatasetCard
+                name='Mesh Gradients'
                 author='By Will Smith'
                 image={Nft3}
                 rating={2}
                 download='#'
               />}
-              { 'Swipe Circles'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
+              { ('Swipe Circles'.toLowerCase().includes(searchString.toLowerCase()) || ('Peter Will'.toLowerCase().includes(searchString.toLowerCase()))) && <DatasetCard
                 name='Swipe Circles'
                 author='By Peter Will'
                 image={Nft4}
                 rating={5}
                 download='#'
               />}
-              { 'Colorful Heaven'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
+              { ('Colorful Heaven'.toLowerCase().includes(searchString.toLowerCase()) || ('Mark Benjamin'.toLowerCase().includes(searchString.toLowerCase())))  && <DatasetCard
                 name='Colorful Heaven'
                 author='By Mark Benjamin'
                 image={Nft5}
                 rating={5}
                 download='#'
               />}
-              { '3D Cubes Art'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
+              { ('3D Cubes Art'.toLowerCase().includes(searchString.toLowerCase()) || ('Manny Gates'.toLowerCase().includes(searchString.toLowerCase()))) && <DatasetCard
                 name='3D Cubes Art'
                 author='By Manny Gates'
                 image={Nft6}

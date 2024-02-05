@@ -20,14 +20,17 @@
 
 */
 
-import React from "react";
+import React, { useState } from "react";
 
 // Chakra imports
 import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Grid,
+  Input,
   Link,
   Text,
   useColorModeValue,
@@ -39,6 +42,7 @@ import Banner from "views/admin/marketplace/components/Banner";
 import TableTopCreators from "views/admin/marketplace/components/TableTopCreators";
 import HistoryItem from "views/admin/marketplace/components/HistoryItem";
 import NFT from "components/card/NFT";
+import DatasetCard from "components/card/DatasetCard";
 import Card from "components/card/Card.js";
 
 // Assets
@@ -56,6 +60,10 @@ import tableDataTopCreators from "views/admin/marketplace/variables/tableDataTop
 import { tableColumnsTopCreators } from "views/admin/marketplace/variables/tableColumnsTopCreators";
 
 export default function Marketplace() {
+
+  // States
+  const [searchString, setSearchString] = useState([]);
+
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
@@ -69,7 +77,7 @@ export default function Marketplace() {
         display={{ base: "block", xl: "grid" }}>
         <Flex
           flexDirection='column'
-          gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
+          gridArea={{ xl: "1 / 1 / 2 / 4", "2xl": "1 / 1 / 2 / 2" }}>
           {/* <Banner /> */}
           <Flex direction='column'>
             <Flex
@@ -79,13 +87,27 @@ export default function Marketplace() {
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}>
               <Text color={textColor} fontSize='2xl' ms='24px' fontWeight='700'>
-                Coming soon
+                Datasets
               </Text>
               <Flex
                 align='center'
                 me='20px'
                 ms={{ base: "24px", md: "0px" }}
                 mt={{ base: "20px", md: "0px" }}>
+                <FormControl>
+                  <Input
+                    isRequired={false}
+                    variant='auth'
+                    fontSize='sm'
+                    ms={{ base: "0px", md: "0px" }}
+                    type='text'
+                    placeholder='Search...'
+                    mb='24px'
+                    fontWeight='500'
+                    size='lg'
+                    onChange={(value) => setSearchString(value.target.value)}
+                  />
+                </FormControl>
                 {/* <Link
                   color={textColorBrand}
                   fontWeight='500'
@@ -113,57 +135,34 @@ export default function Marketplace() {
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
-              {/* <NFT
+              { 'Abstract Colors'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
                 name='Abstract Colors'
                 author='By Esthera Jackson'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
                 image={Nft1}
-                currentbid='0.91 ETH'
+                rating={3}
                 download='#'
-              />
-              <NFT
+              />}
+              { 'ETH AI Brain'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
                 name='ETH AI Brain'
                 author='By Nick Wilson'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
                 image={Nft2}
-                currentbid='0.91 ETH'
+                rating={1}
                 download='#'
-              />
-              <NFT
+              />}
+              { 'Mesh Gradients'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
                 name='Mesh Gradients '
                 author='By Will Smith'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
                 image={Nft3}
-                currentbid='0.91 ETH'
+                rating={2}
                 download='#'
-              /> */}
+              />}
+              { 'Mesh Gradients'.toLowerCase().includes(searchString.toLowerCase()) && <DatasetCard
+                name='Mesh Gradients '
+                author='By Will Smith'
+                image={Nft3}
+                rating={5}
+                download='#'
+              />}
             </SimpleGrid>
             {/* <Text
               mt='45px'
@@ -232,9 +231,9 @@ export default function Marketplace() {
             </SimpleGrid>
           </Flex>
         </Flex>
-        <Flex
+        {/* <Flex
           flexDirection='column'
-          gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}>
+          gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}> *}
           {/* <Card px='0px' mb='20px'>
             <TableTopCreators
               tableData={tableDataTopCreators}
@@ -297,7 +296,7 @@ export default function Marketplace() {
               price='0.91 ETH'
             />
           </Card> */}
-        </Flex>
+        {/* </Flex> */}
       </Grid>
       {/* Delete Product */}
     </Box>

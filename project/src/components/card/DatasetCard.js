@@ -1,7 +1,5 @@
 // Chakra imports
 import {
-  AvatarGroup,
-  Avatar,
   Box,
   Button,
   Flex,
@@ -18,8 +16,9 @@ import React, { useState } from "react";
 import { IoHeart, IoHeartOutline, IoStar, IoStarOutline } from "react-icons/io5";
 
 export default function DatasetCard(props) {
-  const { image, name, author, download, rating } = props;
+  const { image, name, author, rating } = props;
   const [like, setLike] = useState(false);
+  const [requested, setRequested] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
   return (
@@ -146,26 +145,24 @@ export default function DatasetCard(props) {
                 color='brand.500'
               />
             </Flex>
-            <Link
-              href={download}
+            <Button
+              variant={requested ? 'lightBrand': 'darkBrand'}
+              color={requested ? 'black' : 'white'}
+              fontSize='sm'
+              fontWeight='500'
+              borderRadius='70px'
+              px='24px'
+              py='5px'
               mt={{
                 base: "0px",
                 md: "10px",
                 lg: "0px",
                 xl: "10px",
                 "2xl": "0px",
-              }}>
-              <Button
-                variant='darkBrand'
-                color='white'
-                fontSize='sm'
-                fontWeight='500'
-                borderRadius='70px'
-                px='24px'
-                py='5px'>
-                Request access
-              </Button>
-            </Link>
+              }}
+              onClick={() => setRequested(true)}>
+              {requested ? 'Request submitted' : 'Request access'}
+            </Button>
           </Flex>
         </Flex>
       </Flex>

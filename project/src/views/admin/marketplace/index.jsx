@@ -147,21 +147,21 @@ export default function Marketplace() {
                 name='Swipe Circles'
                 author='By Peter Will'
                 image={Nft4}
-                rating={5}
+                rating={0}
                 download='#'
               />}
               { ('Colorful Heaven'.toLowerCase().includes(searchString.toLowerCase()) || ('Mark Benjamin'.toLowerCase().includes(searchString.toLowerCase())))  && <DatasetCard
                 name='Colorful Heaven'
                 author='By Mark Benjamin'
                 image={Nft5}
-                rating={5}
+                rating={4}
                 download='#'
               />}
               { ('3D Cubes Art'.toLowerCase().includes(searchString.toLowerCase()) || ('Manny Gates'.toLowerCase().includes(searchString.toLowerCase()))) && <DatasetCard
                 name='3D Cubes Art'
                 author='By Manny Gates'
                 image={Nft6}
-                rating={5}
+                rating={4.6}
                 download='#'
               />}
             </SimpleGrid>
